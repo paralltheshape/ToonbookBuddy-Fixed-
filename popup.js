@@ -1,6 +1,7 @@
 function changeTab(tabName){
 	$(".tab_windows > div").hide();
 	$(".tab_windows #"+tabName).show();
+	$(".tab_windows #"+tabName).children().show();
 }
 
 $(document).ready(function(){
@@ -32,4 +33,6 @@ $(document).ready(function(){
 	$(".tabs img").click(function(){
 		changeTab($(this).attr("id"));
 	});
+	
+	$("#refresh_notifications").click(updateNotifications);
 });

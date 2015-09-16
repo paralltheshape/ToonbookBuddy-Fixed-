@@ -10,12 +10,17 @@
 				min-width: 450px;
 			}
 			
+			iframe{
+				width: 100%;
+				height: 100%;
+			}
+			
 			.logged_out, .logged_in{
 				display: none;
 				width: 100%;
 			}
 			
-			.tabs img{
+			.tabs img, .icon16{
 				height: 16px;
 				width: 16px;
 				cursor: pointer;
@@ -36,6 +41,7 @@
 			<table class="tabs">
 				<tr>
 					<td><img id="post" src="post.png"></td>
+					<td><img id="notifications" src="notification.png"></td>
 				</tr>
 			</table>
 			
@@ -47,6 +53,13 @@
 						<input type="checkbox" id="post_broadcast">Broadcast?<br>
 						<input type="submit" value="Post!">
 					</form>
+				</div>
+				
+				<div id="notifications">
+					<h3>Notifications</h3>
+					<img class="icon16" id="refresh_notifications" src="refresh.png">
+					
+					<div id="notification_window"></div>
 				</div>
 			</div>
 			

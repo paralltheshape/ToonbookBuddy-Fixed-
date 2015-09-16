@@ -24,6 +24,12 @@ function checkNotifications(){
 					$.get("http://www.toonbook.me/sdtopbarmenu/index/pulldown?format=html", function(data){
 						var notificationDOM = $.parseHTML(data);
 						
+						$("#notification_window").html(data);
+						$("#notification_window a").click(function(){
+							chrome.tabs.update({url: "http://www.toonbook.me" + $(this).attr("href")});
+							return false;
+						});
+						
 						notificationDOM.forEach(function(e){
 							if(e.className == "notifications_unread"){
 								var id = $(e).attr("value");
