@@ -1,3 +1,7 @@
+if(localStorage.getItem("showPostNotifications") == null){
+	localStorage.setItem("showPostNotifications", "true");
+}
+
 var notificationValues = [];
 
 function isLoggedIn(){
@@ -23,7 +27,7 @@ function checkNotifications(){
 					
 					$.get("http://www.toonbook.me/sdtopbarmenu/index/pulldown?format=html", function(data){
 						var notificationDOM = $.parseHTML(data);
-						
+					
 						$("#notification_window").html(data);
 						$("#notification_window a").click(function(){
 							chrome.tabs.update({url: "http://www.toonbook.me" + $(this).attr("href")});
@@ -37,12 +41,14 @@ function checkNotifications(){
 								if(notificationValues.indexOf(id) == -1){
 									notificationValues.push(id);
 									
-									chrome.notifications.create("tb_notification_"+id, {
-										type: "basic",
-										title: "Toonbook Notification!",
-										message: $(e).find(".notification_item_general").text(),
-										iconUrl: $(e).find("img").attr("src")
-									});
+									if(localStorage.getItem("showPostNotifications") == "true"){
+										chrome.notifications.create("tb_notification_"+id, {
+											type: "basic",
+											title: "Toonbook Notification!",
+											message: $(e).find(".notification_item_general").text(),
+											iconUrl: $(e).find("img").attr("src")
+										});
+									}
 								}
 							}
 						});

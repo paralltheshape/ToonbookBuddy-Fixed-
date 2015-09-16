@@ -34,5 +34,11 @@ $(document).ready(function(){
 		changeTab($(this).attr("id"));
 	});
 	
-	$("#refresh_notifications").click(updateNotifications);
+	$("#show_post_notifications").change(function(){
+		localStorage.setItem("showPostNotifications", $(this).is(":checked"));
+	});
+	
+	$("#show_post_notifications").prop("checked", localStorage.getItem("showPostNotifications") == "true");
+	
+	$("#refresh_notifications").click(checkNotifications);
 });
