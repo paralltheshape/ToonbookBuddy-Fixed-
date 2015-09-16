@@ -19,6 +19,12 @@ $(document).ready(function(){
 		$(".logged_out").css("display", "none");
 	}
 	
+	$("#mark_all_read").click(function(){
+		$.get("http://www.toonbook.me/sdtopbarmenu/index/hide?format=html&page=1", function(){
+			checkNotifications();
+		});
+	});
+	
 	$("#post form").submit(function(){
 		$.post("http://www.toonbook.me/wall/index/post", {body: $("#post_text").val(), return_url: "/members/home", privacy: "everyone", broadcast: $("#post_broadcast").prop("checked") ? "on" : "off", "composer[fbpage_id]": 0, "composer[tags]": "", "composer[peoples]": "", format: "json"}, function(data){
 			if(data.status)
