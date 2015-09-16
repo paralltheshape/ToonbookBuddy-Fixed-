@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="jquery.js"></script>
+		<script src="shared.js"></script>
+		<script src="popup.js"></script>
+		
+		<style>
+			body{
+				min-width: 450px;
+			}
+			
+			.logged_out, .logged_in{
+				display: none;
+				width: 100%;
+			}
+			
+			.tabs img{
+				height: 16px;
+				width: 16px;
+				cursor: pointer;
+			}
+			
+			.tab_windows div{
+				display: none;
+			}
+		</style>
+	</head>
+	
+	<body>
+		<div class="logged_out">
+			<b>You need to login to Toonbook to use Toonbook Buddy.</b>
+		</div>
+		
+		<div class="logged_in">
+			<table class="tabs">
+				<tr>
+					<td><img id="post" src="post.png"></td>
+				</tr>
+			</table>
+			
+			<div class="tab_windows">
+				<div id="post">
+					<h3>Quick Post</h3>
+					<form action="#">
+						<textarea cols="60" rows="4" id="post_text" placeholder="Enter your post here..."></textarea><br>
+						<input type="checkbox" id="post_broadcast">Broadcast?<br>
+						<input type="submit" value="Post!">
+					</form>
+				</div>
+			</div>
+			
+			<b style="font-size: 8px">Version 1.0</b>
+		</div>
+	</body>
+</html>

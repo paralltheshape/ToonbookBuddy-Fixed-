@@ -1,0 +1,32 @@
+{
+	"manifest_version": 2,
+	
+	"name": "Toonbook Buddy",
+	"description": "A helpful Chrome extension for Toonbook users.",
+	"version": "1.0",
+	
+	"browser_action": {
+		"default_icon": {
+			"48": "icon.png"
+		},
+		
+		"default_title": "Toonbook Buddy",
+		"default_popup": "popup.html"
+	},
+	
+	"permissions": [
+		"http://www.toonbook.me/*",
+		"http://media.toonbook.me/*",
+		"notifications",
+		"storage"
+	],
+	
+	"icons": {
+		"48": "icon.png"
+	},
+	
+	"background": {
+		"scripts": ["jquery.js", "shared.js", "toonbookbuddy.js"],
+		"persistent": false
+	}
+}
