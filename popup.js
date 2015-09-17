@@ -7,6 +7,8 @@ function changeTab(tabName){
 $(document).ready(function(){
 	changeTab("post");
 	
+	$("#manifest_version").text(chrome.runtime.getManifest().version);
+	
 	if(!isLoggedIn()){
 		chrome.browserAction.setIcon({path: "icon_gray.png"});
 		
