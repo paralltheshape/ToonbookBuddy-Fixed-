@@ -57,12 +57,15 @@ $(document).ready(function(){
 	
 	$("#refresh_notifications").click(checkNotifications);
 	
-	setInterval(function(){
+	function setup(){
 		$.get("http://status.toonbook.me/", function(data){
 			var statusDOM = $.parseHTML(data);
 			var statusTable = $(statusDOM).find(".table");
 			
 			$("#status_window").html(statusTable);
 		});
-	}, 10000);
+	}
+	
+	setInterval(setup, 10000);
+	setup();
 });
