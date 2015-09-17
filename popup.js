@@ -56,4 +56,13 @@ $(document).ready(function(){
 	$("#show_post_notifications").prop("checked", localStorage.getItem("showPostNotifications") == "true");
 	
 	$("#refresh_notifications").click(checkNotifications);
+	
+	setInterval(function(){
+		$.get("http://status.toonbook.me/", function(data){
+			var statusDOM = $.parseHTML(data);
+			var statusTable = $(statusDOM).find(".table");
+			
+			$("#status_window").html(statusTable);
+		});
+	}, 10000);
 });
