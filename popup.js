@@ -26,7 +26,14 @@ $(document).ready(function(){
 	});
 	
 	$("#post form").submit(function(){
-		$.post("http://www.toonbook.me/wall/index/post", {body: $("#post_text").val(), return_url: "/members/home", privacy: "everyone", broadcast: $("#post_broadcast").prop("checked") ? "on" : "off", "composer[fbpage_id]": 0, "composer[tags]": "", "composer[peoples]": "", format: "json"}, function(data){
+		var data = {body: $("#post_text").val(), return_url: "/members/home", privacy: "everyone", "composer[fbpage_id]": 0, "composer[tags]": "", "composer[peoples]": "", format: "json"};
+		
+		if($("#post_broadcast").prop("checked"))
+			data.broadcast = true;
+		else
+			data.is_timeline = 1;
+		
+		$.post("http://www.toonbook.me/wall/index/post", data, function(data){
 			if(data.status)
 				alert("Posted!");
 			else
