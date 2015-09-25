@@ -7,13 +7,11 @@ var notificationValues = [];
 function isLoggedIn(){
 	var ret = true;
 	
-	$.post("http://www.toonbook.me/sdtopbarmenu/index/update?format=json", function(data){
-		try{
-			JSON.parse(data);
-		}catch(e){
-			ret = false;
-		}
-	});
+	$.ajax({type: "POST", url: "http://www.toonbook.me/sdtopbarmenu/index/update?format=json", success: function(data){
+		ret = true;
+	}, error: function(){
+		ret = false;
+	}, async: false});
 	
 	return ret;
 }
@@ -65,8 +63,20 @@ function checkNotifications(){
 	}
 }
 
-checkNotifications();
+function checkAll(){
+	if(!isLoggedIn()){
+		chrome.browserAction.setIcon({path: "icon_gray.png"});
+		
+		$(".logged_in").css("display", "none");
+		$(".logged_out").css("display", "block");
+	}else{
+		chrome.browserAction.setIcon({path: "icon.png"});
+		
+		$(".logged_in").css("display", "block");
+		$(".logged_out").css("display", "none");
+	}
+}
 
-setInterval(function(){
-	checkNotifications();
-}, 10000);
+checkAll();
+
+setInterval(checkAll, 10000);
