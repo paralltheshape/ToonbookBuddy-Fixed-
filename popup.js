@@ -4,6 +4,34 @@ function changeTab(tabName){
 	$(".tab_windows #"+tabName).children().show();
 }
 
+//Thanks, LightStyle on StackOverflow for this code!
+function validateRegex(pattern) {
+	var parts = pattern.split('/'),
+		regex = pattern,
+		options = "";
+	
+	if (parts.length > 1) {
+		regex = parts[1];
+		options = parts[2];
+	}
+	try {
+		new RegExp(regex, options);
+		return true;
+	}
+	catch(e) {
+		return false;
+	}
+}
+
+function checkPostRegex(){
+	var text = $("#post_regex").val();
+	
+	if(validateRegex(text))
+		$("#post_regex").css("background-color", "inherit");
+	else
+		$("#post_regex").css("background-color", "red");
+}
+
 $(document).ready(function(){
 	changeTab("post");
 	
@@ -20,6 +48,9 @@ $(document).ready(function(){
 		$(".logged_in").css("display", "block");
 		$(".logged_out").css("display", "none");
 	}
+	
+	$("#post_regex").val(localStorage.getItem("postRegex"));
+	checkPostRegex();
 	
 	$("#mark_all_read").click(function(){
 		$.get("http://www.toonbook.me/sdtopbarmenu/index/hide?format=html&page=1", function(){
@@ -56,6 +87,17 @@ $(document).ready(function(){
 	$("#show_post_notifications").prop("checked", localStorage.getItem("showPostNotifications") == "true");
 	
 	$("#refresh_notifications").click(checkNotifications);
+	
+	$("#post_regex").on("change paste keyup", checkPostRegex);
+	$("#post_regex_submit").click(function(){
+		var text = $("#post_regex").val();
+		
+		if(validateRegex(text)){
+			localStorage.setItem("postRegex", text);
+			alert("Set!");
+		}else
+			alert("Regex not valid!");
+	});
 	
 	function setup(){
 		$.get("http://status.toonbook.me/", function(data){

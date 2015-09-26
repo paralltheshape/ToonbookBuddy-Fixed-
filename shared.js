@@ -1,8 +1,13 @@
-if(localStorage.getItem("showPostNotifications") == null){
-	localStorage.setItem("showPostNotifications", "true");
+function addToLocalStorage(item, val){
+	if(localStorage.getItem(item) == null)
+		localStorage.setItem(item, val);
 }
 
+addToLocalStorage("showPostNotifications", "true");
+addToLocalStorage("postRegex", "");
+
 var notificationValues = [];
+var postValues = [];
 
 function isLoggedIn(){
 	var ret = true;
@@ -63,6 +68,36 @@ function checkNotifications(){
 	}
 }
 
+function checkPosts(){
+	if(isLoggedIn()){
+		$.get("http://www.toonbook.me/widget/index/name/wall.feed?format=html&mode=recent&list_id=0&type=&minid=0&getUpdate=true&subject=&feedOnly=true", function(data){
+			var postDOM = $.parseHTML(data);
+			
+			if(localStorage.getItem("postRegex") != ""){
+				postDOM.forEach(function(e){
+					if(e.className == "wall-action-item wall-broadcast-item"){
+						var post = $(e).find(".feed_item_bodytext");
+						var postId = $(post).parents("li").attr("rev");
+						
+						if(postValues.indexOf(postId) == -1){
+							postValues.push(postId);
+							
+							if($(post).text().toLowerCase().match(localStorage.getItem("postRegex")) != null){
+								chrome.notifications.create("tb_notification_"+postId, {
+									type: "basic",
+									title: "Toonbook Notification!",
+									message: $(post).parents("li").find(".item_photo_user").attr("alt") + " made a post you wanted to see!",
+									iconUrl: $(post).parents("li").find(".item_photo_user").attr("src")
+								});
+							}
+						}
+					}
+				});
+			}
+		});
+	}
+}
+
 function checkAll(){
 	if(!isLoggedIn()){
 		chrome.browserAction.setIcon({path: "icon_gray.png"});
@@ -75,6 +110,9 @@ function checkAll(){
 		$(".logged_in").css("display", "block");
 		$(".logged_out").css("display", "none");
 	}
+	
+	checkNotifications();
+	checkPosts();
 }
 
 checkAll();
