@@ -86,7 +86,7 @@ function checkPosts(){
 								chrome.notifications.create("tb_notification_"+postId, {
 									type: "basic",
 									title: "Toonbook Notification!",
-									message: $(post).parents("li").find(".item_photo_user").attr("alt") + " made a post you wanted to see!",
+									message: $(post).parents("li").find(".item_photo_user").attr("alt").replace(/<\/?[^>]+(>|$)/g, "") + " made a post you wanted to see!",
 									iconUrl: $(post).parents("li").find(".item_photo_user").attr("src")
 								});
 							}
