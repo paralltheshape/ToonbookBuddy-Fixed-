@@ -7,7 +7,11 @@ addToLocalStorage("showPostNotifications", "true");
 addToLocalStorage("postRegex", "");
 
 var notificationValues = [];
+var messageValues = [];
 var postValues = [];
+
+var notificationAmount = 0;
+var messageAmount = 0;
 
 function isLoggedIn(){
 	var ret = true;
@@ -21,13 +25,20 @@ function isLoggedIn(){
 	return ret;
 }
 
+function fixBadge(){
+	var toSet = notificationAmount + messageAmount;
+	
+	if(toSet > 0)
+		chrome.browserAction.setBadgeText({text: toSet.toString()});
+	else
+		chrome.browserAction.setBadgeText({text: ""});
+}
+
 function checkNotifications(){
 	if(isLoggedIn()){
 		$.post("http://www.toonbook.me/sdtopbarmenu/index/update?format=json", function(data){
 			try{
 				if(data.notificationCount > 0){
-					chrome.browserAction.setBadgeText({text: data.text});
-					
 					$.get("http://www.toonbook.me/sdtopbarmenu/index/pulldown?format=html", function(data){
 						var notificationDOM = $.parseHTML(data);
 					
@@ -43,6 +54,8 @@ function checkNotifications(){
 								
 								if(notificationValues.indexOf(id) == -1){
 									notificationValues.push(id);
+									notificationAmount++;
+									fixBadge();
 									
 									if(localStorage.getItem("showPostNotifications") == "true"){
 										chrome.notifications.create("tb_notification_"+id, {
@@ -56,15 +69,68 @@ function checkNotifications(){
 							}
 						});
 					});
-				}else
-					chrome.browserAction.setBadgeText({text: ""});
+				}else{
+					notificationAmount = 0;
+					fixBadge();
+				}
 			}catch(e){
 				//This shouldn't happen, but just in case.
 				console.log(e.message);
 			}
 		});
 	}else{
-		chrome.browserAction.setBadgeText({text: ""});
+		notificationAmount = 0;
+		fixBadge();
+	}
+}
+
+function checkMessages(){
+	if(isLoggedIn()){
+		$.post("http://www.toonbook.me/sdtopbarmenu/index/messageupdate?format=json", function(data){
+			try{
+				if(data.messageCount > 0){
+					$.get("http://www.toonbook.me/sdtopbarmenu/index/messagepulldown?format=html", function(data){
+						var notificationDOM = $.parseHTML(data);
+					
+						$("#message_window").html(data);
+						$("#message_window a").click(function(){
+							chrome.tabs.update({url: "http://www.toonbook.me" + $(this).attr("href")});
+							return false;
+						});
+						
+						notificationDOM.forEach(function(e){
+							if(e.className == "notifications_unread"){
+								var id = $(e).attr("value");
+								
+								if(messageValues.indexOf(id) == -1){
+									messageAmount++;
+									messageValues.push(id);
+									fixBadge();
+									
+									if(localStorage.getItem("showPostNotifications") == "true"){
+										chrome.notifications.create("tb_notification_"+id, {
+											type: "basic",
+											title: "Toonbook Notification!",
+											message: $(e).find(".notification_item_general").text(),
+											iconUrl: $(e).find("img").attr("src")
+										});
+									}
+								}
+							}
+						});
+					});
+				}else{
+					messageAmount = 0;
+					fixBadge();
+				}
+			}catch(e){
+				//This shouldn't happen, but just in case.
+				console.log(e.message);
+			}
+		});
+	}else{
+		messageAmount = 0;
+		fixBadge();
 	}
 }
 
@@ -113,6 +179,7 @@ function checkAll(){
 	
 	checkNotifications();
 	checkPosts();
+	checkMessages();
 }
 
 checkAll();

@@ -56,6 +56,10 @@ $(document).ready(function(){
 		$.get("http://www.toonbook.me/sdtopbarmenu/index/hide?format=html&page=1", function(){
 			checkNotifications();
 		});
+		
+		$.get("http://www.toonbook.me/sdtopbarmenu/index/hidemessag?format=html&page=1", function(){
+			checkMessages();
+		});
 	});
 	
 	$("#post form").submit(function(){
