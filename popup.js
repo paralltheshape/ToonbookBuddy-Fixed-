@@ -37,17 +37,17 @@ $(document).ready(function(){
 	
 	$("#manifest_version").text(chrome.runtime.getManifest().version);
 	
-	if(!isLoggedIn()){
-		chrome.browserAction.setIcon({path: "icon_gray.png"});
-		
-		$(".logged_in").css("display", "none");
-		$(".logged_out").css("display", "block");
-	}else{
+	isLoggedIn(function(){
 		chrome.browserAction.setIcon({path: "icon.png"});
 		
 		$(".logged_in").css("display", "block");
 		$(".logged_out").css("display", "none");
-	}
+	}, function(){
+		chrome.browserAction.setIcon({path: "icon_gray.png"});
+		
+		$(".logged_in").css("display", "none");
+		$(".logged_out").css("display", "block");
+	});
 	
 	$("#post_regex").val(localStorage.getItem("postRegex"));
 	checkPostRegex();

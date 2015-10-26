@@ -13,16 +13,14 @@ var postValues = [];
 var notificationAmount = 0;
 var messageAmount = 0;
 
-function isLoggedIn(){
-	var ret = true;
+function isLoggedIn(logged_in, logged_out){
+	var logged_out = logged_out || function(){};
 	
 	$.ajax({type: "POST", url: "http://www.toonbook.me/sdtopbarmenu/index/update?format=json", success: function(data){
-		ret = true;
+		logged_in();
 	}, error: function(){
-		ret = false;
-	}, async: false});
-	
-	return ret;
+		logged_out();
+	}});
 }
 
 function fixBadge(){
@@ -35,7 +33,7 @@ function fixBadge(){
 }
 
 function checkNotifications(){
-	if(isLoggedIn()){
+	isLoggedIn(function(){
 		$.post("http://www.toonbook.me/sdtopbarmenu/index/update?format=json", function(data){
 			try{
 				if(data.notificationCount > 0){
@@ -78,14 +76,14 @@ function checkNotifications(){
 				console.log(e.message);
 			}
 		});
-	}else{
+	}, function(){
 		notificationAmount = 0;
 		fixBadge();
-	}
+	});
 }
 
 function checkMessages(){
-	if(isLoggedIn()){
+	isLoggedIn(function(){
 		$.post("http://www.toonbook.me/sdtopbarmenu/index/messageupdate?format=json", function(data){
 			try{
 				if(data.messageCount > 0){
@@ -128,14 +126,14 @@ function checkMessages(){
 				console.log(e.message);
 			}
 		});
-	}else{
+	}, function(){
 		messageAmount = 0;
 		fixBadge();
-	}
+	});
 }
 
 function checkPosts(){
-	if(isLoggedIn()){
+	isLoggedIn(function(){
 		$.get("http://www.toonbook.me/widget/index/name/wall.feed?format=html&mode=recent&list_id=0&type=&minid=0&getUpdate=true&subject=&feedOnly=true", function(data){
 			var postDOM = $.parseHTML(data);
 			
@@ -161,21 +159,21 @@ function checkPosts(){
 				});
 			}
 		});
-	}
+	});
 }
 
 function checkAll(){
-	if(!isLoggedIn()){
-		chrome.browserAction.setIcon({path: "icon_gray.png"});
-		
-		$(".logged_in").css("display", "none");
-		$(".logged_out").css("display", "block");
-	}else{
+	isLoggedIn(function(){
 		chrome.browserAction.setIcon({path: "icon.png"});
 		
 		$(".logged_in").css("display", "block");
 		$(".logged_out").css("display", "none");
-	}
+	}, function(){
+		chrome.browserAction.setIcon({path: "icon_gray.png"});
+		
+		$(".logged_in").css("display", "none");
+		$(".logged_out").css("display", "block");
+	});
 	
 	checkNotifications();
 	checkPosts();
