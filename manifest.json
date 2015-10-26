@@ -3,7 +3,7 @@
 	
 	"name": "Toonbook Buddy",
 	"description": "A helpful Chrome extension for Toonbook users.",
-	"version": "1.4.2",
+	"version": "1.4.3",
 	
 	"browser_action": {
 		"default_icon": {
@@ -17,7 +17,8 @@
 	"content_scripts": [
 		{
 			"matches": ["http://www.toonbook.me/*", "http://www.toonbook.me/*"],
-			"js": ["jquery.js", "arrive.min.js", "EventEmitter.js", "content_script.js"]
+			"js": ["jquery.js", "arrive.min.js", "EventEmitter.js", "content_script.js"],
+			"css": ["toonbook_buddy.css"]
 		}
 	],
 	
@@ -34,5 +35,9 @@
 	"background": {
 		"scripts": ["jquery.js", "shared.js", "toonbookbuddy.js"],
 		"persistent": false
-	}
+	},
+	
+	"web_accessible_resources": [
+		"icon16.png"
+	]
 }

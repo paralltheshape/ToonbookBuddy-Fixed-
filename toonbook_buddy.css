@@ -1,0 +1,7 @@
+.toon_tb_dev{
+	background-image: url("chrome-extension://__MSG_@@extension_id__/icon16.png");
+	background-repeat: no-repeat;
+	background-position: left center;
+	padding: 2px 0 4px 21px;
+	min-height: 16px;
+}
