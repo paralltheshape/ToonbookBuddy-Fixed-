@@ -1,5 +1,15 @@
 $(document).ready(function(){
 	var ToonbookBuddy = {};
+	var comment_box_styles = {
+		"overflow-x": "auto",
+		"overflow-y": "hidden",
+		"resize": "none",
+		"padding-bottom": "0px",
+		"padding-top": "4px",
+		"padding-left": "4px",
+		"height": "58px",
+		"max-height": "58px"
+	};
 
 	ToonbookBuddy.EventEmitter = new EventEmitter();
 	
@@ -28,8 +38,10 @@ $(document).ready(function(){
 			author: jComment.find(".comments_author").text(),
 			authorObject: jComment.find(".comments_author"),
 			authorId: jComment.find(".comments_author").find("a").attr("rev"),
+			commentId: jComment.attr("rev").split("item-")[1],
 			message: jComment.clone().find(".comments_info").remove("div, span").text(),
 			messageObject: jComment.clone().find(".comments_info"),
+			postObject: jComment.parents(".wall-action-item"),
 			date: new Date(jComment.find(".timestamp").attr("title")),
 			element: jComment,
 			comment: true,
@@ -43,8 +55,31 @@ $(document).ready(function(){
 		}
 	}
 	
+	function addReplyFeature(comment){
+		comment.element.find(".comment-like").after(" - <a href='javascript:void(0)' id='comment-reply'>Reply</a>");
+		comment.element.attr("id", "buddy-comment-"+comment.commentId);
+		
+		comment.message.split(/\s/).forEach(function(line){
+			if(line[0] == "@"){
+				var split = line.split("@");
+				var id = split[1];
+				
+				if(!isNaN(parseInt(id))){
+					var replyingTo = comment.postObject.find('.wall-comment-item[rev="item-'+id+'"]');
+					
+					if(replyingTo.length != 0){
+						var newComment = comment.element.find(".comments_info").html();
+						newComment = newComment.replace(line, "<a href='javascript:void(0)' class='comment_reply' data-replying-to='"+id+"'>"+line+"</a>");
+						comment.element.find(".comments_info").html(newComment);
+					}
+				}
+			}
+		});
+	}
+	
 	ToonbookBuddy.EventEmitter.on("post", addDeveloperTag);
 	ToonbookBuddy.EventEmitter.on("comment", addDeveloperTag);
+	ToonbookBuddy.EventEmitter.on("comment", addReplyFeature);
 	
 	$(document).arrive(".wall-action-item", function(){
 		emitPostEvent($(this));
@@ -60,5 +95,32 @@ $(document).ready(function(){
 	
 	$(".wall-comment-item").each(function(){
 		emitCommentEvent($(this));
+	});
+	
+	$(".comment_reply").click(function(){
+		window.location.hash = "#buddy-comment-"+$(this).attr("data-replying-to");
+		window.scrollBy(0, -40);
+	});
+	
+	$(".comment_reply").hover(function(){
+		var replying_to = $("#buddy-comment-"+$(this).attr("data-replying-to"));
+		
+		replying_to.css("background-color", "rgb(224, 255, 255)");
+	}, function(){
+		var replying_to = $("#buddy-comment-"+$(this).attr("data-replying-to"));
+		
+		replying_to.css("background-color", "");
+	});
+	
+	$(document).on("click", "#comment-reply", function(){
+		var post = $(this).parents(".wall-action-item");
+		var comment = $(this).parents(".wall-comment-item");
+		
+		post.find(".wall-comment-form #body").val(post.find(".wall-comment-form #body").val() + "@"+comment.attr("rev").split("item-")[1]+"\n");
+		
+		if(post.find(".wall-comment-form #body").css("display") != "block"){
+			post.find(".wall-comment-form").show();
+			post.find(".wall-comment-form #body").css(comment_box_styles);
+		}
 	});
 });
