@@ -49,12 +49,6 @@ $(document).ready(function(){
 		});
 	}
 	
-	function addDeveloperTag(post){
-		if(post.authorId == "user_29481"){
-			post.authorObject.addClass("toon_tb_dev");
-		}
-	}
-	
 	function addReplyFeature(comment){
 		comment.element.find(".comment-like").after(" - <a href='javascript:void(0)' id='comment-reply'>Reply</a>");
 		comment.element.attr("id", "buddy-comment-"+comment.commentId);
@@ -77,8 +71,12 @@ $(document).ready(function(){
 		});
 	}
 	
-	ToonbookBuddy.EventEmitter.on("post", addDeveloperTag);
-	ToonbookBuddy.EventEmitter.on("comment", addDeveloperTag);
+	function addDeveloperTag(){
+		if($(this).attr("rev") == "user_29481" && $(this).attr("href") == "/profile/boynedmaster" && $(this).find("img").length == 0){
+			$(this).addClass("toon_tb_dev");
+		}
+	}
+	
 	ToonbookBuddy.EventEmitter.on("comment", addReplyFeature);
 	
 	$(document).arrive(".wall-action-item", function(){
@@ -92,6 +90,9 @@ $(document).ready(function(){
 	$(document).arrive(".wall-comment-item", function(){
 		emitCommentEvent($(this));
 	});
+	
+	$(document).arrive("a", addDeveloperTag);
+	$("a").each(addDeveloperTag);
 	
 	$(".wall-comment-item").each(function(){
 		emitCommentEvent($(this));
