@@ -17,8 +17,8 @@
 	"content_scripts": [
 		{
 			"matches": ["http://www.toonbook.me/*", "http://www.toonbook.me/*"],
-			"js": ["jquery.js", "arrive.min.js", "EventEmitter.js", "content_script.js"],
-			"css": ["toonbook_buddy.css"]
+			"js": ["static/js/jquery.js", "static/js/arrive.min.js", "static/js/EventEmitter.js", "content_script.js"],
+			"css": ["static/css/toonbook_buddy.css"]
 		}
 	],
 	
@@ -33,7 +33,7 @@
 	},
 	
 	"background": {
-		"scripts": ["jquery.js", "shared.js", "toonbookbuddy.js"],
+		"scripts": ["static/js/jquery.js", "shared.js", "toonbookbuddy.js"],
 		"persistent": false
 	},
 	
