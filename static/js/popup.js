@@ -88,7 +88,12 @@ $(document).ready(function(){
 		localStorage.setItem("showPostNotifications", $(this).is(":checked"));
 	});
 	
+	$("#adblock").change(function(){
+		localStorage.setItem("adblock", $(this).is(":checked"));
+	});
+	
 	$("#show_post_notifications").prop("checked", localStorage.getItem("showPostNotifications") == "true");
+	$("#adblock").prop("checked", localStorage.getItem("adblock") == "true");
 	
 	$("#refresh_notifications").click(checkNotifications);
 	

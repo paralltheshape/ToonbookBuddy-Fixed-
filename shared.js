@@ -4,6 +4,7 @@ function addToLocalStorage(item, val){
 }
 
 addToLocalStorage("showPostNotifications", "true");
+addToLocalStorage("adblock", "true");
 addToLocalStorage("postRegex", "");
 
 var notificationValues = [];

@@ -79,6 +79,11 @@ $(document).ready(function(){
 	
 	ToonbookBuddy.EventEmitter.on("comment", addReplyFeature);
 	
+	chrome.runtime.sendMessage({method: "getAdblock"}, function(response){
+		if(response)
+			$(".layout_core_ad_campaign").remove();
+	});
+	
 	$(document).arrive(".wall-action-item", function(){
 		emitPostEvent($(this));
 	});
