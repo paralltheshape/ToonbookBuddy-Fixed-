@@ -1,3 +1,8 @@
+var changelog = [
+	"Added this sweet changelog alert thingy",
+	"If you see this, drop me (SCARY Bart) telling me how cool I am. Or anything really. (I'm lonely)"
+]; //This should be changed every update, big or small. In a big update, write everything in the past versions from the last major to the current version. Example: When going from version 1.4 to 1.5, write everything that changed in versions like 1.4.1, 1.4.2, etc
+
 $(document).ready(function(){
 	var ToonbookBuddy = {};
 	var comment_box_styles = {
@@ -99,6 +104,17 @@ $(document).ready(function(){
 	chrome.runtime.sendMessage({method: "getAdblock"}, function(response){
 		if(response)
 			$(".layout_core_ad_campaign").remove();
+	});
+	
+	chrome.runtime.sendMessage({method: "newUpdate"}, function(response){
+		if(response){
+			swal({
+				title: "Toonbook Buddy Update",
+				text: "<b>Toonbook Buddy has been updated. Here is the list of new features:</b><br><ul><li>"+changelog.join("</li><li>")+"</li></ul>",
+				html: true,
+				confirmButtonText: "Toontastic!"
+			});
+		}
 	});
 	
 	$(document).arrive(".wall-action-item", function(){

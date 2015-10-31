@@ -5,3 +5,8 @@
 	padding: 2px 0 4px 21px;
 	min-height: 16px;
 }
+
+.sa-button-container .confirm{
+	position: relative;
+	left: 100%;
+}
