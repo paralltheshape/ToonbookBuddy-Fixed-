@@ -22,6 +22,7 @@ $(document).ready(function(){
 			author: jPost.find(".feed_item_username").text(),
 			authorObject: jPost.find(".feed_item_username:first"),
 			authorId: jPost.find(".feed_item_username:first").attr("rev"),
+			postId: jPost.attr("rev").split("item-")[1],
 			message: jPost.find(".feed_item_bodytext").html(),
 			messageObject: jPost.find(".feed_item_bodytext"),
 			date: new Date(jPost.find(".timestamp").attr("title")),
@@ -38,7 +39,7 @@ $(document).ready(function(){
 			author: jComment.find(".comments_author").text(),
 			authorObject: jComment.find(".comments_author"),
 			authorId: jComment.find(".comments_author").find("a").attr("rev"),
-			commentId: jComment.attr("rev").split("item-")[1],
+			postId: jComment.attr("rev").split("item-")[1],
 			message: jComment.clone().find(".comments_info").remove("div, span").text(),
 			messageObject: jComment.clone().find(".comments_info"),
 			postObject: jComment.parents(".wall-action-item"),
@@ -51,7 +52,7 @@ $(document).ready(function(){
 	
 	function addReplyFeature(comment){
 		comment.element.find(".comment-like").after(" - <a href='javascript:void(0)' id='comment-reply'>Reply</a>");
-		comment.element.attr("id", "buddy-comment-"+comment.commentId);
+		comment.element.attr("id", "buddy-comment-"+comment.postId);
 		
 		comment.message.split(/\s/).forEach(function(line){
 			if(line[0] == "@"){
@@ -77,6 +78,22 @@ $(document).ready(function(){
 		}
 	}
 	
+	function showId(post){
+		var toCheck;
+		
+		if(post.comment)
+			toCheck = post.element;
+		else
+			toCheck = post.element.closest(".generic_layout_container").find(".wall-view-action-title");
+		
+		if(toCheck.find("#post-id").length == 0){
+			if(toCheck.find(".timestamp").length != 0)
+				toCheck.find(".timestamp").after(" - <b id='post-id'>"+post.postId+"</b>");
+		}
+	}
+	
+	ToonbookBuddy.EventEmitter.on("post", showId);
+	ToonbookBuddy.EventEmitter.on("comment", showId);
 	ToonbookBuddy.EventEmitter.on("comment", addReplyFeature);
 	
 	chrome.runtime.sendMessage({method: "getAdblock"}, function(response){
