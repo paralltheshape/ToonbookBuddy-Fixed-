@@ -1,6 +1,9 @@
 var changelog = [
-	"Added this sweet changelog alert thingy",
-	"If you see this, drop me (SCARY Bart) telling me how cool I am. Or anything really. (I'm lonely)"
+	"Comments (and occasionally posts) now show their ID",
+	"Fixed a bug where Toonbook Buddy would only work on the main domain, and not other nodes",
+	"Added a built in Adblock",
+	"Replies now show the name next to the ID, to support non Toonbook Buddy users",
+	"Added this sweet changelog alert thingy"
 ]; //This should be changed every update, big or small. In a big update, write everything in the past versions from the last major to the current version. Example: When going from version 1.4 to 1.5, write everything that changed in versions like 1.4.1, 1.4.2, etc
 
 $(document).ready(function(){
@@ -155,7 +158,7 @@ $(document).ready(function(){
 		var post = $(this).parents(".wall-action-item");
 		var comment = $(this).parents(".wall-comment-item");
 		
-		post.find(".wall-comment-form #body").val(post.find(".wall-comment-form #body").val() + "@"+comment.attr("rev").split("item-")[1]+"\n");
+		post.find(".wall-comment-form #body").val(post.find(".wall-comment-form #body").val() + "@"+comment.attr("rev").split("item-")[1]+" / "+comment.find(".comments_author").text().trim()+"\n");
 		
 		if(post.find(".wall-comment-form #body").css("display") != "block"){
 			post.find(".wall-comment-form").show();
