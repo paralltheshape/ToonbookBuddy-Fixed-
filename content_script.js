@@ -1,9 +1,5 @@
 var changelog = [
-	"Comments (and occasionally posts) now show their ID",
-	"Fixed a bug where Toonbook Buddy would only work on the main domain, and not other nodes",
-	"Added a built in Adblock",
-	"Replies now show the name next to the ID, to support non Toonbook Buddy users",
-	"Added this sweet changelog alert thingy"
+	"Added a setting to block posts or comments by regex, meaning you can block bad trends or anything else"
 ]; //This should be changed every update, big or small. In a big update, write everything in the past versions from the last major to the current version. Example: When going from version 1.4 to 1.5, write everything that changed in versions like 1.4.1, 1.4.2, etc
 
 $(document).ready(function(){
@@ -100,9 +96,33 @@ $(document).ready(function(){
 		}
 	}
 	
+	var postBlock = null;
+	
+	function blockPost(post){
+		function go(){
+			if(postBlock != ""){
+				if(post.message != null){
+					if(post.message.match(new RegExp(postBlock, "i")) != null){
+						post.element.remove();
+					}
+				}
+			}
+		}
+		
+		if(postBlock == null){
+			chrome.runtime.sendMessage({method: "getPostBlock"}, function(response){
+				postBlock = response;
+				go();
+			});
+		}else
+			go();
+	}
+	
 	ToonbookBuddy.EventEmitter.on("post", showId);
+	ToonbookBuddy.EventEmitter.on("post", blockPost);
 	ToonbookBuddy.EventEmitter.on("comment", showId);
 	ToonbookBuddy.EventEmitter.on("comment", addReplyFeature);
+	ToonbookBuddy.EventEmitter.on("comment", blockPost);
 	
 	chrome.runtime.sendMessage({method: "getAdblock"}, function(response){
 		if(response)

@@ -32,6 +32,15 @@ function checkPostRegex(){
 		$("#post_regex").css("background-color", "red");
 }
 
+function checkBlockRegex(){
+	var text = $("#block_regex").val();
+	
+	if(validateRegex(text))
+		$("#block_regex").css("background-color", "inherit");
+	else
+		$("#block_regex").css("background-color", "red");
+}
+
 $(document).ready(function(){
 	changeTab("post");
 	
@@ -50,7 +59,9 @@ $(document).ready(function(){
 	});
 	
 	$("#post_regex").val(localStorage.getItem("postRegex"));
+	$("#block_regex").val(localStorage.getItem("blockRegex"));
 	checkPostRegex();
+	checkBlockRegex();
 	
 	$("#mark_all_read").click(function(){
 		$.get("http://www.toonbook.me/sdtopbarmenu/index/hide?format=html&page=1", function(){
@@ -98,11 +109,21 @@ $(document).ready(function(){
 	$("#refresh_notifications").click(checkNotifications);
 	
 	$("#post_regex").on("change paste keyup", checkPostRegex);
+	$("#block_regex").on("change paste keyup", checkBlockRegex);
 	$("#post_regex_submit").click(function(){
 		var text = $("#post_regex").val();
 		
 		if(validateRegex(text)){
 			localStorage.setItem("postRegex", text);
+			alert("Set!");
+		}else
+			alert("Regex not valid!");
+	});
+	$("#block_regex_submit").click(function(){
+		var text = $("#block_regex").val();
+		
+		if(validateRegex(text)){
+			localStorage.setItem("blockRegex", text);
 			alert("Set!");
 		}else
 			alert("Regex not valid!");

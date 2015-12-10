@@ -6,6 +6,7 @@ function addToLocalStorage(item, val){
 addToLocalStorage("showPostNotifications", "true");
 addToLocalStorage("adblock", "true");
 addToLocalStorage("postRegex", "");
+addToLocalStorage("blockRegex", "");
 
 var notificationValues = [];
 var messageValues = [];
@@ -147,7 +148,7 @@ function checkPosts(){
 						if(postValues.indexOf(postId) == -1){
 							postValues.push(postId);
 							
-							if($(post).text().toLowerCase().match(localStorage.getItem("postRegex")) != null){
+							if($(post).text().match(new RexExp(localStorage.getItem("postRegex"), "i")) != null){
 								chrome.notifications.create("tb_notification_"+postId, {
 									type: "basic",
 									title: "Toonbook Notification!",
