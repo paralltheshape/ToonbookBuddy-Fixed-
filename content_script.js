@@ -1,5 +1,6 @@
 var changelog = [
-	"Added \"Nice Bear\" mode, that automatically likes every post you see"
+	"Added \"Nice Bear\" mode, that automatically likes every post you see",
+	"Added a setting to block posts by regex. Block stupid trends or anything else"
 ]; //This should be changed every update, big or small. In a big update, write everything in the past versions from the last major to the current version. Example: When going from version 1.4 to 1.5, write everything that changed in versions like 1.4.1, 1.4.2, etc
 
 $(document).ready(function(){
