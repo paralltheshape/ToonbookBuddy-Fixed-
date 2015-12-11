@@ -103,8 +103,13 @@ $(document).ready(function(){
 		localStorage.setItem("adblock", $(this).is(":checked"));
 	});
 	
+	$("#nicebear").change(function(){
+		localStorage.setItem("nicebear", $(this).is(":checked"));
+	});
+	
 	$("#show_post_notifications").prop("checked", localStorage.getItem("showPostNotifications") == "true");
 	$("#adblock").prop("checked", localStorage.getItem("adblock") == "true");
+	$("#nicebear").prop("checked", localStorage.getItem("nicebear") == "true");
 	
 	$("#refresh_notifications").click(checkNotifications);
 	

@@ -1,9 +1,9 @@
 chrome.browserAction.setBadgeBackgroundColor({color: [0, 191, 255, 255]});
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse){
-	if(request.method == "getAdblock")
+	if(request.method == "getAdblock"){
 		sendResponse(localStorage.getItem("adblock") == "true");
-	else if(request.method == "newUpdate"){
+	}else if(request.method == "newUpdate"){
 		if(localStorage.getItem("version") != chrome.runtime.getManifest().version){
 			localStorage.setItem("version", chrome.runtime.getManifest().version);
 			sendResponse(true);
@@ -11,6 +11,8 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse){
 			sendResponse(false);
 	}else if(request.method == "getPostBlock"){
 		sendResponse(localStorage.getItem("blockRegex"));
+	}else if(request.method == "getNiceBear"){
+		sendResponse(localStorage.getItem("nicebear") == "true");
 	}else
 		sendResponse(null);
 });

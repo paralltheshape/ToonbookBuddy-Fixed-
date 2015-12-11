@@ -5,6 +5,7 @@ function addToLocalStorage(item, val){
 
 addToLocalStorage("showPostNotifications", "true");
 addToLocalStorage("adblock", "true");
+addToLocalStorage("nicebear", "false");
 addToLocalStorage("postRegex", "");
 addToLocalStorage("blockRegex", "");
 
