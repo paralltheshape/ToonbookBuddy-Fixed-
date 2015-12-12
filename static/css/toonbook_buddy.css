@@ -1,9 +1,25 @@
-.toon_tb_dev{
-	background-image: url("chrome-extension://__MSG_@@extension_id__/icon16.png");
+.toon_tb_dev, .toon_tb_shade, .toon_tb_ruff{
 	background-repeat: no-repeat;
 	background-position: left center;
 	padding: 2px 0 4px 21px;
 	min-height: 16px;
+}
+
+.toon_tb_dev{
+	background-image: url("chrome-extension://__MSG_@@extension_id__/icon16.png");
+}
+
+.toon_tb_shade{
+	background-image: url("chrome-extension://__MSG_@@extension_id__/static/img/bat16.ico");
+}
+
+.toon_tb_shade span{
+	color: gray !important;
+	text-shadow: 0px 1px 1px gray !important;
+}
+
+.toon_tb_ruff{
+	background-image: url("chrome-extension://__MSG_@@extension_id__/static/img/chinesefood16.png");
 }
 
 .sa-button-container .confirm{

@@ -3,7 +3,7 @@
 	
 	"name": "Toonbook Buddy",
 	"description": "A helpful Chrome extension for Toonbook users.",
-	"version": "1.6.2.1",
+	"version": "1.6.3",
 	
 	"browser_action": {
 		"default_icon": {
@@ -38,6 +38,8 @@
 	},
 	
 	"web_accessible_resources": [
-		"icon16.png"
+		"icon16.png",
+		"static/img/bat16.ico",
+		"static/img/chinesefood16.png"
 	]
 }
