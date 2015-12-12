@@ -125,7 +125,6 @@ $(document).ready(function(){
 				var button = post.element.find(".action-like");
 				
 				if(button.text() == "Like"){
-					console.log("what a nice post");
 					button[0].click(); //button.click() doesn't work for some reason
 				}
 			}
