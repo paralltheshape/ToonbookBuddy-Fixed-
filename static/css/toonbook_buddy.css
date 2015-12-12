@@ -1,4 +1,4 @@
-.toon_tb_dev, .toon_tb_shade, .toon_tb_ruff{
+.toon_tb_dev, .toon_tb_shade, .toon_tb_ruff, .toon_tb_blast, .toon_tb_nicebear{
 	background-repeat: no-repeat;
 	background-position: left center;
 	padding: 2px 0 4px 21px;
@@ -20,6 +20,16 @@
 
 .toon_tb_ruff{
 	background-image: url("chrome-extension://__MSG_@@extension_id__/static/img/chinesefood16.png");
+}
+
+.toon_tb_blast{
+	background-image: url("chrome-extension://__MSG_@@extension_id__/static/img/cat16.png");
+	color: #00616F !important;
+	text-shadow: 0px 1px 1px #00616F !important;
+}
+
+.toon_tb_nicebear{
+	background-image: url("chrome-extension://__MSG_@@extension_id__/static/img/heart16.ico");
 }
 
 .sa-button-container .confirm{

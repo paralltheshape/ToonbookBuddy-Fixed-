@@ -1,6 +1,5 @@
 var changelog = [
-	"Fixed post regex notifications not working",
-	"Gave Shade and Ruff Ruffman custom nametags. Ask me on my profile if you want one"
+	"Just some more icons, message me if you want one."
 ]; //This should be changed every update, big or small. In a big update, write everything in the past versions from the last major to the current version. Example: When going from version 1.4 to 1.5, write everything that changed in versions like 1.4.1, 1.4.2, etc
 
 $(document).ready(function(){
@@ -88,6 +87,14 @@ $(document).ready(function(){
 		
 		if($(this).attr("rev") == "user_15756" && $(this).attr("href") == "/profile/animaljam98776" && $(this).find("img").length == 0){
 			$(this).addClass("toon_tb_ruff");
+		}
+		
+		if($(this).attr("rev") == "user_33602" && $(this).attr("href") == "/profile/blastisanerd" && $(this).find("img").length == 0){
+			$(this).addClass("toon_tb_blast");
+		}
+		
+		if($(this).attr("rev") == "user_7896" && $(this).attr("href") == "/profile/kellbuger" && $(this).find("img").length == 0){
+			$(this).addClass("toon_tb_nicebear");
 		}
 	}
 	
