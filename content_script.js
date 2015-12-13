@@ -1,5 +1,5 @@
 var changelog = [
-	"Removed \"Nice Bear Mode\", as per Lily's request"
+	"More nametags. Like, a lot of nametags. Like, A LOT a lot of nametags."
 ]; //This should be changed every update, big or small. In a big update, write everything in the past versions from the last major to the current version. Example: When going from version 1.4 to 1.5, write everything that changed in versions like 1.4.1, 1.4.2, etc
 
 $(document).ready(function(){
@@ -77,28 +77,28 @@ $(document).ready(function(){
 	}
 	
 	function addDeveloperTag(){
-		if($(this).attr("rev") == "user_29481" && $(this).attr("href") == "/profile/boynedmaster" && $(this).find("img").length == 0){
-			$(this).addClass("toon_tb_dev");
+		var icons = {
+			"user_29481": "toon_tb_dev",
+			"user_34549": "toon_tb_shade",
+			"user_15756": "toon_tb_ruff",
+			"user_33602": "toon_tb_blast",
+			"user_7896": "toon_tb_nicebear",
+			"user_1959": "toon_tb_kom",
+			"user_35881": "toon_tb_caz",
+			"user_30619": "toon_tb_mozart",
+			"user_28858": "toon_tb_drlollipop",
+			"user_1829": "toon_tb_rufftime",
+			"user_5227": "toon_tb_doggo",
+			"user_28441": "toon_tb_homestar",
+			"user_24503": "toon_tb_procat"
 		}
 		
-		if($(this).attr("rev") == "user_34549" && $(this).attr("href") == "/profile/Shade" && $(this).find("img").length == 0){
-			$(this).addClass("toon_tb_shade");
-		}
-		
-		if($(this).attr("rev") == "user_15756" && $(this).attr("href") == "/profile/animaljam98776" && $(this).find("img").length == 0){
-			$(this).addClass("toon_tb_ruff");
-		}
-		
-		if($(this).attr("rev") == "user_33602" && $(this).attr("href") == "/profile/blastisanerd" && $(this).find("img").length == 0){
-			$(this).addClass("toon_tb_blast");
-		}
-		
-		if($(this).attr("rev") == "user_7896" && $(this).attr("href") == "/profile/kellbuger" && $(this).find("img").length == 0){
-			$(this).addClass("toon_tb_nicebear");
-		}
-		
-		if($(this).attr("rev") == "user_1959" && $(this).attr("href") == "/profile/WolfedChihuahu" && $(this).find("img").length == 0){
-			$(this).addClass("toon_tb_kom");
+		if($(this).find("img").length == 0){
+			var icon = icons[$(this).attr("rev")];
+			
+			if(icon != undefined){
+				$(this).addClass(icon);
+			}
 		}
 	}
 	
