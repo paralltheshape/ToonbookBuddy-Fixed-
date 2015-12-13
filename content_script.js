@@ -1,6 +1,5 @@
 var changelog = [
-	"More nametags, comment on my profile if you want one",
-	"Added Christmas logo by Shade"
+	"Removed \"Nice Bear Mode\", as per Lily's request"
 ]; //This should be changed every update, big or small. In a big update, write everything in the past versions from the last major to the current version. Example: When going from version 1.4 to 1.5, write everything that changed in versions like 1.4.1, 1.4.2, etc
 
 $(document).ready(function(){
@@ -118,7 +117,6 @@ $(document).ready(function(){
 	}
 	
 	var postBlock = null;
-	var niceBear = null;
 	
 	function blockPost(post){
 		function go(){
@@ -140,29 +138,8 @@ $(document).ready(function(){
 			go();
 	}
 	
-	function niceBearEvent(post){
-		function go(){
-			if(niceBear){
-				var button = post.element.find(".action-like");
-				
-				if(button.text() == "Like"){
-					button[0].click(); //button.click() doesn't work for some reason
-				}
-			}
-		}
-		
-		if(niceBear == null){
-			chrome.runtime.sendMessage({method: "getNiceBear"}, function(response){
-				niceBear = response;
-				go();
-			});
-		}else
-			go();
-	}
-	
 	ToonbookBuddy.EventEmitter.on("post", showId);
 	ToonbookBuddy.EventEmitter.on("post", blockPost);
-	ToonbookBuddy.EventEmitter.on("post", niceBearEvent);
 	ToonbookBuddy.EventEmitter.on("comment", showId);
 	ToonbookBuddy.EventEmitter.on("comment", addReplyFeature);
 	ToonbookBuddy.EventEmitter.on("comment", blockPost);

@@ -11,8 +11,6 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse){
 			sendResponse(false);
 	}else if(request.method == "getPostBlock"){
 		sendResponse(localStorage.getItem("blockRegex"));
-	}else if(request.method == "getNiceBear"){
-		sendResponse(localStorage.getItem("nicebear") == "true");
 	}else
 		sendResponse(null);
 });
