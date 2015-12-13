@@ -207,7 +207,9 @@ $(document).ready(function(){
 	});
 	
 	if(new Date().getMonth() == 11){
-		$("[src='/public/admin/logoheader.png']").addClass("tb_xmas_logo");
-		$("[src='/public/admin/logoheader.png']").attr("src", "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==");
+		var logo = $("[src='/public/admin/logoheader.png']");
+		
+		logo.addClass("tb_xmas_logo");
+		logo.attr("src", "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==");
 	}
 });
