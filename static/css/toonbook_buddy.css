@@ -1,4 +1,4 @@
-.toon_tb_dev, .toon_tb_shade, .toon_tb_ruff, .toon_tb_blast, .toon_tb_nicebear{
+.toon_tb_dev, .toon_tb_shade, .toon_tb_ruff, .toon_tb_blast, .toon_tb_nicebear, .toon_tb_kom{
 	background-repeat: no-repeat;
 	background-position: left center;
 	padding: 2px 0 4px 21px;
@@ -30,6 +30,16 @@
 
 .toon_tb_nicebear{
 	background-image: url("chrome-extension://__MSG_@@extension_id__/static/img/heart16.ico");
+}
+
+.toon_tb_kom{
+	background-image: url("chrome-extension://__MSG_@@extension_id__/static/img/snowflake16.png");
+}
+
+.tb_xmas_logo{
+	background-image: url("chrome-extension://__MSG_@@extension_id__/static/img/xmas_logo.png");
+	width: 104px;
+	height: 31px;
 }
 
 .sa-button-container .confirm{

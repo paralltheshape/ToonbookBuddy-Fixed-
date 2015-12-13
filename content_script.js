@@ -1,5 +1,6 @@
 var changelog = [
-	"Just some more icons, message me if you want one."
+	"More nametags, comment on my profile if you want one",
+	"Added Christmas logo by Shade"
 ]; //This should be changed every update, big or small. In a big update, write everything in the past versions from the last major to the current version. Example: When going from version 1.4 to 1.5, write everything that changed in versions like 1.4.1, 1.4.2, etc
 
 $(document).ready(function(){
@@ -95,6 +96,10 @@ $(document).ready(function(){
 		
 		if($(this).attr("rev") == "user_7896" && $(this).attr("href") == "/profile/kellbuger" && $(this).find("img").length == 0){
 			$(this).addClass("toon_tb_nicebear");
+		}
+		
+		if($(this).attr("rev") == "user_1959" && $(this).attr("href") == "/profile/WolfedChihuahu" && $(this).find("img").length == 0){
+			$(this).addClass("toon_tb_kom");
 		}
 	}
 	
@@ -223,4 +228,9 @@ $(document).ready(function(){
 			post.find(".wall-comment-form #body").css(comment_box_styles);
 		}
 	});
+	
+	if(new Date().getMonth() == 11){
+		$("[src='/public/admin/logoheader.png']").addClass("tb_xmas_logo");
+		$("[src='/public/admin/logoheader.png']").attr("src", "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==");
+	}
 });
