@@ -9,6 +9,15 @@
 	background-image: url("chrome-extension://__MSG_@@extension_id__/icon16.png");
 }
 
+.toon_tb_dev:after{
+	content: "Toonbook Buddy Developer";
+	margin-left: 5px;
+	padding: 1px 4px 1px 1px;
+	font-family: Consolas;
+	color: white;
+	background-color: #1DADFF;
+}
+
 .toon_tb_shade{
 	background-image: url("chrome-extension://__MSG_@@extension_id__/static/img/bat16.ico");
 }
