@@ -3,7 +3,7 @@
 	
 	"name": "Toonbook Buddy",
 	"description": "A helpful Chrome extension for Toonbook users.",
-	"version": "1.6.6.1",
+	"version": "1.6.7",
 	
 	"browser_action": {
 		"default_icon": {
@@ -25,7 +25,8 @@
 	"permissions": [
 		"http://*.toonbook.me/*",
 		"http://media.toonbook.me/*",
-		"notifications"
+		"notifications",
+		"tabs"
 	],
 	
 	"icons": {

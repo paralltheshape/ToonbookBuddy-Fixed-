@@ -34,6 +34,12 @@ function fixBadge(){
 		chrome.browserAction.setBadgeText({text: ""});
 }
 
+chrome.notifications.onClicked.addListener(function(nid){
+	chrome.tabs.create({
+		url: "http://www.toonbook.me" + notificationValues[nid]
+	});
+});
+
 function checkNotifications(){
 	isLoggedIn(function(){
 		$.post("http://www.toonbook.me/sdtopbarmenu/index/update?format=json", function(data){
@@ -51,9 +57,9 @@ function checkNotifications(){
 						notificationDOM.forEach(function(e){
 							if(e.className == "notifications_unread"){
 								var id = $(e).attr("value");
-								
-								if(notificationValues.indexOf(id) == -1){
-									notificationValues.push(id);
+								console.log(notificationValues);
+								if(notificationValues["tb_notification_"+id] == undefined){
+									notificationValues["tb_notification_"+id] = $(e).find(".feed_item_username:last").attr("href");
 									notificationAmount++;
 									fixBadge();
 									
