@@ -1,5 +1,15 @@
 var changelog = [
-	"Notifications can now be clicked on to go to their post (well, probably)."
+	"You can now click a notification and be taken to their respective post",
+	"Gave out custom nametags to anyone who asks for one. And a lot of people asked for one",
+	"Added Christmas logo, created by Shade. The logo will automatically change every December",
+	"You can now block posts by regex, say goodbye to stupid trends",
+	"-----------OTHER NEWS, PLEASE READ---------",
+	"Also, some side notes. I got banned for talking shit to Lily (she kept infracting me for stupid reasons)",
+	"I'm only banned for 3 days, relax",
+	"To anyone who I didn't add/change their nametag, it's because I can't look at the master post and see the colors. Sorry",
+	"I'm still watching, though. I'm on a toon that I won't be making posts on",
+	"The moral of the story is Lily is retarded",
+	"And the best part is they can't ban me from here <3"
 ]; //This should be changed every update, big or small. In a big update, write everything in the past versions from the last major to the current version. Example: When going from version 1.4 to 1.5, write everything that changed in versions like 1.4.1, 1.4.2, etc
 
 $(document).ready(function(){
@@ -45,7 +55,7 @@ $(document).ready(function(){
 			authorId: jComment.find(".comments_author").find("a").attr("rev"),
 			postId: jComment.attr("rev").split("item-")[1],
 			message: jComment.clone().find(".comments_info").remove("div, span").text(),
-			messageObject: jComment.clone().find(".comments_info"),
+			messageObject: jComment.find(".comments_info"),
 			postObject: jComment.parents(".wall-action-item"),
 			date: new Date(jComment.find(".timestamp").attr("title")),
 			element: jComment,

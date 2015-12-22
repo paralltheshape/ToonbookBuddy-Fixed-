@@ -35,9 +35,11 @@ function fixBadge(){
 }
 
 chrome.notifications.onClicked.addListener(function(nid){
-	chrome.tabs.create({
-		url: "http://www.toonbook.me" + notificationValues[nid]
-	});
+	if(notificationValues[nid] != undefined){
+		chrome.tabs.create({
+			url: "http://www.toonbook.me" + notificationValues[nid]
+		});
+	}
 });
 
 function checkNotifications(){
