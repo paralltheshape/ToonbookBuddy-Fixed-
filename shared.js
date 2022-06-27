@@ -18,7 +18,7 @@ var messageAmount = 0;
 function isLoggedIn(logged_in, logged_out){
 	var logged_out = logged_out || function(){};
 	
-	$.ajax({type: "POST", url: "http://www.toonbook.me/sdtopbarmenu/index/update?format=json", success: function(data){
+	$.ajax({type: "POST", url: "https://www.toonbook.me/sdtopbarmenu/index/update?format=json", success: function(data){
 		logged_in();
 	}, error: function(){
 		logged_out();
@@ -37,22 +37,22 @@ function fixBadge(){
 chrome.notifications.onClicked.addListener(function(nid){
 	if(notificationValues[nid] != undefined){
 		chrome.tabs.create({
-			url: "http://www.toonbook.me" + notificationValues[nid]
+			url: "https://www.toonbook.me" + notificationValues[nid]
 		});
 	}
 });
 
 function checkNotifications(){
 	isLoggedIn(function(){
-		$.post("http://www.toonbook.me/sdtopbarmenu/index/update?format=json", function(data){
+		$.post("https://www.toonbook.me/sdtopbarmenu/index/update?format=json", function(data){
 			try{
 				if(data.notificationCount > 0){
-					$.get("http://www.toonbook.me/sdtopbarmenu/index/pulldown?format=html", function(data){
+					$.get("https://www.toonbook.me/sdtopbarmenu/index/pulldown?format=html", function(data){
 						var notificationDOM = $.parseHTML(data);
 					
 						$("#notification_window").html(data);
 						$("#notification_window a").click(function(){
-							chrome.tabs.update({url: "http://www.toonbook.me" + $(this).attr("href")});
+							chrome.tabs.update({url: "https://www.toonbook.me" + $(this).attr("href")});
 							return false;
 						});
 						
@@ -94,15 +94,15 @@ function checkNotifications(){
 
 function checkMessages(){
 	isLoggedIn(function(){
-		$.post("http://www.toonbook.me/sdtopbarmenu/index/messageupdate?format=json", function(data){
+		$.post("https://www.toonbook.me/sdtopbarmenu/index/messageupdate?format=json", function(data){
 			try{
 				if(data.messageCount > 0){
-					$.get("http://www.toonbook.me/sdtopbarmenu/index/messagepulldown?format=html", function(data){
+					$.get("https://www.toonbook.me/sdtopbarmenu/index/messagepulldown?format=html", function(data){
 						var notificationDOM = $.parseHTML(data);
 					
 						$("#message_window").html(data);
 						$("#message_window a").click(function(){
-							chrome.tabs.update({url: "http://www.toonbook.me" + $(this).attr("href")});
+							chrome.tabs.update({url: "https://www.toonbook.me" + $(this).attr("href")});
 							return false;
 						});
 						
@@ -144,7 +144,7 @@ function checkMessages(){
 
 function checkPosts(){
 	isLoggedIn(function(){
-		$.get("http://www.toonbook.me/widget/index/name/wall.feed?format=html&mode=recent&list_id=0&type=&minid=0&getUpdate=true&subject=&feedOnly=true", function(data){
+		$.get("https://www.toonbook.me/widget/index/name/wall.feed?format=html&mode=recent&list_id=0&type=&minid=0&getUpdate=true&subject=&feedOnly=true", function(data){
 			var postDOM = $.parseHTML(data);
 			
 			if(localStorage.getItem("postRegex") != ""){
