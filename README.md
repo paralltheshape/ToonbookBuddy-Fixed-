@@ -1,6 +1,16 @@
 # ToonbookBuddy
 A helpful Chrome extension for Toonbook users.
 
-Official build: https://chrome.google.com/webstore/detail/toonbook-buddy/pllgbikcebaondodhcdojmmijidllhla
+HOW TO LOAD IN CHROME:
 
-A simple way to build Toonbook Buddy is to make the contents a .zip file, and load it using Developer Tools.
+1: PRESS THE 3 DOTS!! in the top right
+
+2: PRESS "SETTINGS"
+
+3: PRESS "EXTENSIONS"
+
+4: DOWNLOAD THIS AND THEN PRESS LOAD UNPACKED
+
+5: SELECT THE FOLDER AND THEN BOOM CHECK TOONBOOK (IF U GOT ACCESS)
+
+6: ENJOY THE BENEFITS
